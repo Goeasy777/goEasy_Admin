@@ -16,8 +16,11 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Build Next.js app
+-name : clear chache build 
     run: next build --no-cache
+
+
+    - name: Build Next.js app
       run: npm run build
 
     - name: Deploy to EC2
