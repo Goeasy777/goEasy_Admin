@@ -1,38 +1,40 @@
-name: CI/CD Pipeline
+name: Deploy to EC2
 
 on:
   push:
     branches:
-      - main  # Replace with your target branch, if different (e.g., 'develop')
+      - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: 18  # Update to match the Node.js version you're using
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Install dependencies
       run: npm install
 
-    - name: Build the project
+    - name: Build Next.js app
       run: npm run build
 
     - name: Deploy to EC2
-      env:
-        HOST: ${{ secrets.EC2_HOST }}
-        KEY: ${{ secrets.EC2_KEY }}
-        USER: ec2-user  # EC2 user (default is ec2-user for Amazon Linux)
-      run: |
-        scp -i $KEY -r . $USER@$HOST:/home/ec2-user/nextjs-app  # SCP the app to EC2 instance
-        ssh -i $KEY $USER@$HOST << 'EOF'
+      uses: appleboy/scp-action@v0.1.1
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_KEY }}
+        source: '.'
+        target: '/home/ec2-user/nextjs-app'
+
+    - name: SSH and Restart Application
+      uses: appleboy/ssh-action@v0.1.1
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_KEY }}
+        script: |
           cd /home/ec2-user/nextjs-app
-          npm install --production  # Install production dependencies on EC2
-          pm2 restart nextjs-app || pm2 start npm --name "nextjs-app" -- start  # Start the app with PM2
-        EOF
+          npm install --production
+          pm2 restart nextjs-app || pm2 start npm --name "npm start" -- start
