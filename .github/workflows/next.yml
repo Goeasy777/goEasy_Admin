@@ -16,6 +16,10 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+-name : clear chache build 
+    run: next build --no-cache
+
+
     - name: Build Next.js app
       run: npm run build
 
