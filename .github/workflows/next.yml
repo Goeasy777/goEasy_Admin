@@ -8,16 +8,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    runs-on: self-hosted   
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
     - name: Install dependencies
       run: npm install
-
--name : clear chache build 
-    run: next build --no-cache
 
 
     - name: Build Next.js app
