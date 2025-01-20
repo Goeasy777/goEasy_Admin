@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import Logo from "@/app/assets/images/Logo.png";
+// import Logo from "@/app/assets/images/Logo.png";
 import { ImHammer2 } from "react-icons/im";
 import {
   FaListOl,
