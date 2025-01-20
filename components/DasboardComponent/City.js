@@ -14,10 +14,12 @@ function City() {
   const [data, setData] = useState("0");
   const [publish, setPublish] = useState("0");
   const [unpublish, setUnpublish] = useState("0");
-
+// huihuihui 
   const fetchCity = async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/fetchCityForD`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/fetchCityForD`
+      );
       // Ensure response is converted to JSON
       const Data = await response.json();
 
@@ -43,7 +45,10 @@ function City() {
         </div>
 
         <div className="grid grid-cols-2 gap-2">
-          <Link href={"/city/list"} className="w-full flex items-center justify-center">
+          <Link
+            href={"/city/list"}
+            className="w-full flex items-center justify-center"
+          >
             <div className="bg-green-100 text-green-600 p-2 rounded-full">
               <IoLocation size={20} />
             </div>
@@ -54,7 +59,10 @@ function City() {
             </div>
           </Link>
 
-          <Link href={"/city/list"} className="w-full flex items-center justify-center">
+          <Link
+            href={"/city/list"}
+            className="w-full flex items-center justify-center"
+          >
             <div className="bg-blue-100 text-blue-600 p-2 rounded-full">
               <TbLocationBolt size={20} />
             </div>
