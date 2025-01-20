@@ -1,3 +1,21 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1c22a59b9fd4e532830e5ca493814b1224aa55be3ce8e8d7fa41cbb73adb60f6
-size 451
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.scrollable-div {
+    @apply bg-sidebarBG text-textWhite p-4 overflow-y-auto;
+    /* Tailwind utilities */
+}
+
+.scrollable-div::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+.scrollable-div::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
