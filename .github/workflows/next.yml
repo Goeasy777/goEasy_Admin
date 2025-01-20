@@ -7,17 +7,30 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest   # This uses the Ubuntu environment provided by GitHub Actions
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Check if the build already exists
+    - name: Check if build exists
+      id: check_build
+      run: |
+        if [ -d "./.next" ]; then
+          echo "Build already exists"
+          echo "build_exists=true" >> $GITHUB_ENV
+        else
+          echo "Build does not exist"
+          echo "build_exists=false" >> $GITHUB_ENV
+
+    # Only install dependencies and build if the build does not exist
     - name: Install dependencies
+      if: env.build_exists == 'false'
       run: npm install
 
-
     - name: Build Next.js app
+      if: env.build_exists == 'false'
       run: npm run build
 
     - name: Deploy to EC2
@@ -39,3 +52,4 @@ jobs:
           cd /home/ec2-user/nextjs-app
           npm install --production
           pm2 restart nextjs-app || pm2 start npm --name "npm start" -- start
+
