@@ -7,19 +7,38 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted   # This uses the Ubuntu environment provided by GitHub Actions
-    
+    runs-on: self-hosted
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Install dependencies 
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' # Replace with your version
+
+    - name: Cache Node.js modules
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
       run: npm ci
+      timeout-minutes: 10
 
     - name: Build Next.js app
       run: npm run build
 
-    - run: |
-          touch .env
-          echo "${{ secrets.PROD }}" > .env
-    - run: pm2 restart nextjs-app
+    - name: Configure environment variables
+      run: |
+        touch .env
+        echo "${{ secrets.PROD }}" > .env
+
+    - name: Restart PM2 App
+      run: |
+        pm2 stop nextjs-app || true
+        pm2 start npm --name "nextjs-app" -- start
