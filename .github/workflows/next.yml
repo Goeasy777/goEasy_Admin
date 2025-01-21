@@ -19,8 +19,6 @@ jobs:
     - name: Build Next.js app
       run: npm run build
 
-
-    - run: npm ci
     - run: |
           touch .env
           echo "${{ secrets.PROD }}" > .env
