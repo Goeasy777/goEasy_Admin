@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest   # This uses the Ubuntu environment provided by GitHub Actions
+    runs-on: self-hosted   # This uses the Ubuntu environment provided by GitHub Actions
     
     steps:
     - name: Checkout code
