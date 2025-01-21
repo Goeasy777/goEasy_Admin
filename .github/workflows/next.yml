@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest   # This uses the Ubuntu environment provided by GitHub Actions
+    runs-on: self-hosted   # This uses the Ubuntu environment provided by GitHub Actions
     
     steps:
     - name: Checkout code
@@ -19,23 +19,7 @@ jobs:
     - name: Build Next.js app
       run: npm run build
 
-    - name: Deploy to EC2
-      uses: appleboy/scp-action@v0.1.1
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_KEY }}
-        source: '.'
-        target: '/home/ec2-user/nextjs-app'
-
-    - name: SSH and Restart Application
-      uses: appleboy/ssh-action@v0.1.1
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_KEY }}
-        script: |
-          cd /home/ec2-user/nextjs-app
-          npm install --production
-          pm2 restart nextjs-app || pm2 start npm --name "npm start" -- start
-
+    - run: |
+          touch .env
+          echo "${{ secrets.PROD }}" > .env
+    - run: pm2 restart Backend
