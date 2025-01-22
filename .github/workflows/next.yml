@@ -39,6 +39,7 @@ jobs:
         echo "${{ secrets.PROD }}" > .env
 
     - name: Restart PM2 App
-      run: |
-        pm2 stop nextjs-app || true
-        pm2 start npm --name "nextjs-app" -- start
+  run: |
+    pm2 stop goeasy_dashboard || true
+    pm2 delete goeasy_dashboard || true
+    pm2 start npm --name "goeasy_dashboard" -- start
