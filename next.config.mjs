@@ -6,7 +6,7 @@ nextConfig = {
         return [
           {
             source: '/api/:path*',
-            destination: 'https://api.unfulo.in/:path*',
+            destination: 'http://localhost:3000/:path',
           },
         ]
       },
