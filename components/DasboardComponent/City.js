@@ -90,7 +90,7 @@ function City() {
           <h1 className="text-base"> {data || "0"}</h1>
         </div>
       </div>
-    <div><h6>hwdjdjbd</h6></div>
+   
     </div>
   );
 }
