@@ -40,5 +40,5 @@ jobs:
 
     - name: Restart PM2 App
        run: |
-         pm2 stop goeasy_dashboard || true 
-         pm2 start npm --name "goeasy_dashboard" -- start
+        pm2 stop goeasy_dashboard || true 
+        pm2 start npm --name "goeasy_dashboard" -- start
