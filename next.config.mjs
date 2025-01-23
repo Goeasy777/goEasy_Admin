@@ -2,6 +2,7 @@
 let nextConfig = {};
 
 nextConfig = {
+
   async rewrites() {
     return [
       {
@@ -9,7 +10,8 @@ nextConfig = {
         destination: "http://localhost:3000/:path",
 
         // destination: "https://api.unfulo.in/:path*",
-      },
+
+      }
     ];
   },
  
