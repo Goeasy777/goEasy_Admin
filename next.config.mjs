@@ -7,7 +7,7 @@ nextConfig = {
     return [
       {
         source: "/api/:path*",
-        destination: "http://43.240.97.44/:path*",
+        destination: "http://43.240.97.44/users/:path*",
 
         // destination: "https://api.unfulo.in/:path*",
 
