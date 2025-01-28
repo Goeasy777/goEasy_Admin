@@ -9,7 +9,7 @@ export const iserror = (error) => {
 
 export const adminsignin = (adminData) => async (dispatch) => {
   try {
-    const response = await axios.post("users/login", adminData,
+    const response = await axios.post("/users/login", adminData,
       {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
@@ -33,7 +33,7 @@ export const adminsignin = (adminData) => async (dispatch) => {
 
 export const adminsignup = (adminData) => async (dispatch) => {
   try {
-    const response = await axios.post("users/signup", adminData, {
+    const response = await axios.post("/users/signup", adminData, {
       headers: { "Content-Type": "application/json" },
       withCredentials: true,
     });
