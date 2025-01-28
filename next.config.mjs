@@ -7,8 +7,8 @@ nextConfig = {
       {
         source: "/api/:path*",
 
-        destination: "https://43.204.97.44/:path*",
-        // destination: "https://api.unfulo.in/:path*",
+        // destination: "https://43.204.97.44/:path*",
+        destination: "https://unfulo.in/:path*",
       },
     ];
   },
