@@ -44,20 +44,20 @@ const page = () => {
   };
 
   const SearchHandler = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   const response = await fetch(
-    //     `http://localhost:5000/users/searchCity/${search}`
-    //   );
-    //   if (!response.ok) {
-    //     throw new Error("Failed to search cities");
-    //   }
-    //   const result = await response.json();
-    //   setSearchResults(result.data);
-    //   // setSearch("")
-    // } catch (err) {
-    //   setError(err.message);
-    // }
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/searchCity/${search}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to search cities");
+      }
+      const result = await response.json();
+      setSearchResults(result.data);
+      // setSearch("")
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const handleDeleteClick = (id) => {

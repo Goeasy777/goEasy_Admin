@@ -50,7 +50,7 @@ const Page = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/users/getCategory"
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/users/getCategory`
         );
         if (response.data?.category) {
           setCategoriesList(response.data.category);

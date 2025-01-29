@@ -15,47 +15,47 @@ const page = () => {
     const [searchResults, setSearchResults] = useState([]);
     const dispatch = useDispatch();
 
-    // const fetchCities = async () => {
-    //     try {
-    //         const response = await fetch('http://localhost:5000/users/getCity');
-    //         if (!response.ok) {
-    //             throw new Error('Failed to fetch cities');
-    //         }
-    //         const data = await response.json();
-    //         setData(data.data);
-    //     } catch (err) {
-    //         setError(err.message);
-    //     }
-    // };
-
-    const SearchHandler = async (e) => {
-        // e.preventDefault();
-        // try {
-        //     const response = await fetch(`http://localhost:5000/users/searchCity/${search}`);
-        //     if (!response.ok) {
-        //         throw new Error('Failed to search cities');
-        //     }
-        //     const result = await response.json();
-        //     setSearchResults(result.data);
-        //     // setSearch("")
-        // } catch (err) {
-        //     setError(err.message);
-        // }
+    const fetchCities = async () => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/getCity`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch cities');
+            }
+            const data = await response.json();
+            setData(data.data);
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
-    // const deleteHandler = async (id) => {
-    //     try {
-    //         const response = await fetch(`http://localhost:5000/users/deleteCity/${id}`);
-    //         setDelete(true)
-    //     } catch (err) {
-    //         setError(err.message);
-    //     }
-    // }
+    const SearchHandler = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/searchCity/${search}`);
+            if (!response.ok) {
+                throw new Error('Failed to search cities');
+            }
+            const result = await response.json();
+            setSearchResults(result.data);
+            // setSearch("")
+        } catch (err) {
+            setError(err.message);
+        }
+    };
 
-    // useEffect(() => {
-    //     fetchCities();
-    //     setDelete(false)
-    // }, [deleted]);
+    const deleteHandler = async (id) => {
+        try {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/deleteCity/${id}`);
+            setDelete(true)
+        } catch (err) {
+            setError(err.message);
+        }
+    }
+
+    useEffect(() => {
+        fetchCities();
+        setDelete(false)
+    }, [deleted]);
 
     const ShowNum = () => {
         return <div className='flex flex-col gap-4' style={{}}>
